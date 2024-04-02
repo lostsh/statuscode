@@ -1,8 +1,8 @@
 # statuscode
 Simple C99 script to retrieve **HTTP status code** from _(simple)_ request on port **80** of a given ip.
 > Minimalist dependecy on sys lib
->> main.c: `stdio.h`
->> requestor.c: `unistd.h` _(for i/o)_, `sys/socket.h`, `arpa/inet.h`
+>> - main.c: `stdio.h`
+>> - requestor.c: `unistd.h` _(for i/o)_, `sys/socket.h`, `arpa/inet.h`
 
 
 ## Build / Compile
