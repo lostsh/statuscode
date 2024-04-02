@@ -23,8 +23,12 @@ gcc  -g -std=c99 -Wall -pedantic -D_XOPEN_SOURCE=700 -fsanitize=address src/main
 ## Install 
 
 ## Run
-The binary file is in the `bin/` direcotry, either `main` or `requestor`.
+Example to make output pretty: 
+```bash
+./bin/main -t $(dig domain.tld +dnssec +short) && echo -e "\n"
+```
 
+The binary file is in the `bin/` direcotry, either `main` or `requestor`.
 
 Give target ip by argument. `./bin/requestor -t 1.1.1.1`.
 
