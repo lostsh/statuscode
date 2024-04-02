@@ -40,7 +40,7 @@ int getHttpCode(const char *target_ip, char *return_code){
     if(resp_size <= 0) return resp_size;
     *(resp_buff+resp_size-1) = '\0';
 
-    //Colose socket
+    //Close socket
     shutdown(sockfd, 2);
 
     //parse output
