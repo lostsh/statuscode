@@ -18,46 +18,34 @@
 int getHttpCode(const char *target_ip, char *return_code){
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
+    //Settings for target socket
     struct sockaddr_in target = {0};
     target.sin_family = AF_INET;
     target.sin_port = htons(80);
     target.sin_addr.s_addr = inet_addr(target_ip);
 
+    //to check the return code
+    int status = -1;
+
     //Connect socket to server
-    if(connect(sockfd, (struct sockaddr*)&target, sizeof(target)) < 0){
-        //write(STDERR_FILENO, "[ ! ]\tException: connect failed\n", 32);
-        return 1;
-    }
+    if((status = connect(sockfd, (struct sockaddr*)&target, sizeof(target))) < 0) return status;
 
     //Send HTTP request
     char *reqStr = "HEAD / HTTP/1.0\r\n\r\n";
-    if(send(sockfd, reqStr, len(reqStr), 0) < 0){
-        //write(STDERR_FILENO, "[ ! ]\tException: send failed\n", 29);
-        return 1;
-    }
+    if((status = send(sockfd, reqStr, len(reqStr), 0)) < 0) return status;
 
     //Handle http response
     char resp_buff[16] = "";
     int resp_size = recv(sockfd, resp_buff, sizeof(resp_buff), 0);
-    if(resp_size <= 0){
-        //write(STDERR_FILENO, "[ ! ]\tException: read or socket closed\n", 40);
-        return resp_size;
-    }
+    if(resp_size <= 0) return resp_size;
     *(resp_buff+resp_size-1) = '\0';
-    //write(STDOUT_FILENO, resp_buff, resp_size);
-    //write(1, "\n", 1);
 
     //Colose socket
     shutdown(sockfd, 2);
 
     //parse output
-    int parse_success = parseCode(resp_buff, return_code);
-    if(parse_success < 0){
-        //write(STDERR_FILENO, "[ ! ]\tExeption: parsing code\n", 29);
-        return parse_success;
-    }
+    if((status = parseCode(resp_buff, return_code)) < 0) return status;
 
-    //close(sockfd);
     return 0;
 }
 
