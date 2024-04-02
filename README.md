@@ -4,6 +4,10 @@ Simple C99 script to retrieve **HTTP status code** from _(simple)_ request on po
 >> - main.c: `stdio.h`
 >> - requestor.c: `unistd.h` _(for i/o)_, `sys/socket.h`, `arpa/inet.h`
 
+To be precise, the script is just sending `HEAD / HTTP1.0\r\n\r\n` to port **80** of the given target ip. Then read the first **16 bytes** of the response to extract the **http status code**.
+
+For refence about the HTTP verb `HEAD` see [rfc spec](https://www.rfc-editor.org/rfc/rfc1945.html#section-8.2) which explain is the same as `GET` but the server only answer with headers.
+
 
 ## Build / Compile
 
