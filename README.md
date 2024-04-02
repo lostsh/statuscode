@@ -1,8 +1,11 @@
 # statuscode
 Simple C99 script to retrieve **HTTP status code** from _(simple)_ request on port **80** of a given ip.
+> Minimalist dependecy on sys lib
+>> main.c: `stdio.h`
+>> requestor.c: `unistd.h` _(for i/o)_, `sys/socket.h`, `arpa/inet.h`
+
+
 ## Build / Compile
-1. Using make
-2. Using gcc _(signle commandline)_
 
 ### 1. Using make
 Just type `make` into the directory containing the `Makefile` and the binary will be build into `bin/`.
