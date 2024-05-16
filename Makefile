@@ -31,6 +31,3 @@ clean_doc:
 # Clean *~ *.o
 clean_bin:
 	@rm -rf $(BIN_DIR)/*
-
-
-go build -o bin/ src/main.go
